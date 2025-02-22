@@ -27,7 +27,7 @@
 - Step3 : python app.py
 
 ## Video demo in web application
-![Demo](assets/app-demo.gif)
+![Demo](assets/a4-demo.gif)
 
 ## Output sample in web application
 ![App Screenshot](assets/screen-shot.png)
