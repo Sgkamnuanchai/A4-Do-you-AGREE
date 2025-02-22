@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A4-st124738</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #021436;
+            color: #f799f1;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin-top: 50px;
+            padding: 20px;
+        }
+        .generate-box {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .input-box, .output-box {
+            width: 45%;
+            background-color: #ffffff;
+            color: #000000;
+            padding: 20px;
+            border-radius: 10px;
+            word-wrap: break-word;
+        }
+        .input-box textarea, .output-box textarea {
+            width: 90%;
+            height: 200px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            font-size: 1em;
+            resize: none;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            background-color: #3498db;
+            color: white;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .results-header {
+            background-color: #e74c3c;
+            color: #ffffff;
+            padding: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 10px 10px 0 0;
+            margin-top: 20px;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>A4 Do you AGREE?</h1>
+        <form id="generateForm" class="generate-box">
+            <div class="input-box">
+                <h3>Sentence A (Premise):</h3>
+                <textarea id="sentenceA" placeholder="Enter premise sentence" required></textarea>
+            </div>
+            <div class="input-box">
+                <h3>Sentence B (Hypothesis):</h3>
+                <textarea id="sentenceB" placeholder="Enter hypothesis sentence" required></textarea>
+            </div>
+        </form>
+        <button type="submit" id="compareButton">Compare Sentences</button>
+        
+        <div class="results-header" id="resultsHeader" style="display:none;">
+            <h3>Similarity Score: <span id="similarityScore"></span></h3>
+            <h3>Label: <span id="label"></span></h3>
+        </div>
+        
+        <div id="error-message" class="error"></div>
+    </div>
+
+    <script>
+        const compareButton = document.getElementById("compareButton");
+
+        compareButton.onclick = async (e) => {
+            e.preventDefault();
+            const sentenceA = document.getElementById("sentenceA").value;
+            const sentenceB = document.getElementById("sentenceB").value;
+
+            try {
+                const response = await fetch("/compare", {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify({sentence_a: sentenceA, sentence_b: sentenceB}),
+                });
+
+                const data = await response.json();
+
+                if (data.similarity_score !== undefined && data.label !== undefined) {
+                    document.getElementById("similarityScore").innerText = data.similarity_score;
+                    document.getElementById("label").innerText = data.label;
+                    document.getElementById("resultsHeader").style.display = "block";
+                } else {
+                    document.getElementById("error-message").innerText = "Error: Unable to calculate similarity.";
+                }
+            } catch (error) {
+                document.getElementById("error-message").innerText = "Error: Unable to calculate similarity.";
+            }
+        };
+    </script>
+</body>
+</html>
