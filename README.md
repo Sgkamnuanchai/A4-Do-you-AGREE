@@ -17,7 +17,7 @@
 
 ### Challenges Encountered During the Implementation:
 - The model achieved only 35.30% accuracy. This suggests underfitting, where the model might not be complex enough or has not been trained sufficiently.
-- Mismatched pairs with combineing SNLI and MNLI dataset add complexity, which might have hindered learning. The model may require more sophisticated tokenization or architectural adjustments to handle these cases better.
+- Mismatched pairs with combineing SNLI and MNLI dataset add complexity, which might hich might have made it harder for the model to learn effectively. The model may require more sophisticated tokenization or architectural adjustments to handle these cases better.
 
 ### Potential Improvements or Modifications:
 -  Experiment with a smaller learning rate, increase batch size, or increase the number of epochs for training. Fine-tuning the model hyperparameters could help overcome underfitting and improve performance.
