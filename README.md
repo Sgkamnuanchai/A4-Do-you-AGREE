@@ -22,10 +22,16 @@
 -  Experiment with a smaller learning rate, increase batch size, or increase the number of epochs for training. Fine-tuning the model hyperparameters could help overcome underfitting and improve performance.
 
 ## How to run the application:
-- Step1 : Download model files from this link : 
+- Step1 : Download model files from this link : https://drive.google.com/drive/folders/1Lh0tBunxUiue6FRi9HuAZfi5RjXHG_c1?usp=sharing
 - Step2 : Move s_bert_model.pth into model/
 - Step3 : python app.py
 
-## Screenshot
+## Video demo in web application
+![Demo](assets/app-demo.gif)
+
+## Output sample in web application
+![App Screenshot](assets/screen-shot.png)
+
+
 
 
